@@ -10,16 +10,22 @@ pool:
   vmImage: 'macOS-latest'
 
 steps:
-
-- script: |
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "current workdir ${PWD}"
+      sleep 2
       ls -la
       sleep 5
-  displayName: 'Show workfolder content'
-
-- task: Gradle@2
+- task: JavaToolInstaller@0
   inputs:
-    gradleWrapperFile: 'gradlew'
-    workingDirectory: 'android/'
+    versionSpec: '8'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+- task: Gradle@2
+  inputs:    
+    gradleWrapperFile: './android/gradlew'
+    workingDirectory: '.'
     options: '--debug'
     tasks: 'build'
     publishJUnitResults: false
