@@ -12,13 +12,6 @@ pool:
 
 steps:
 
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '8'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
-
-
 - task: CmdLine@2
   inputs:
     script: |
