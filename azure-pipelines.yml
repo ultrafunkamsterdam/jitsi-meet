@@ -17,22 +17,18 @@ steps:
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
 
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: $(Build.SourcesDirectory)
-    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: CmdLine@2
   inputs:
     script: |
-      echo "current workdir $(Build.ArtifactStagingDirectory)"
+      echo "current workdir $(Build.SourcesDirectory)"
       sleep 2
-      ls -la
+      ls -la $(Build.SourcesDirectory)
       sleep 5
 - task: Gradle@2
   inputs:    
-    gradleWrapperFile: $(Build.ArtifactStagingDirectory)/android/gradlew
-    workingDirectory: $(Build.ArtifactStagingDirectory)
+    gradleWrapperFile: android/gradlew
+    workingDirectory: $(Build.SourcesDirectory)
     options: '--debug'
     tasks: 'build'
     publishJUnitResults: false
