@@ -20,14 +20,14 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo "current workdir ${PWD}"
+      echo "current workdir $(Agent.BuildDirectory)"
       sleep 2
       ls -la
       sleep 5
 - task: Gradle@2
   inputs:    
-    gradleWrapperFile: './android/gradlew'
-    workingDirectory: '.'
+    gradleWrapperFile: $(Agent.BuildDirectory)/android/gradlew
+    workingDirectory: $(Agent.BuildDirectory)
     options: '--debug'
     tasks: 'build'
     publishJUnitResults: false
