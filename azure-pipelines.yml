@@ -27,3 +27,9 @@ steps:
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     sonarQubeRunAnalysis: false
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/android'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
