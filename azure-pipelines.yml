@@ -10,6 +10,13 @@ pool:
   vmImage: 'macOS-latest'
 
 steps:
+
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '8'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
 - task: CmdLine@2
   inputs:
     script: |
@@ -17,11 +24,6 @@ steps:
       sleep 2
       ls -la
       sleep 5
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '8'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
 - task: Gradle@2
   inputs:    
     gradleWrapperFile: './android/gradlew'
