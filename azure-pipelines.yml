@@ -9,6 +9,7 @@ trigger:
 pool:
   vmImage: 'macOS-latest'
 
+
 steps:
 
 - task: JavaToolInstaller@0
@@ -21,10 +22,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo "current workdir $(Build.SourcesDirectory)"
-      sleep 2
-      ls -la $(Build.SourcesDirectory)
+      cp -r . $(Build.SourcesDirectory)
       sleep 5
+
 - task: Gradle@2
   inputs:    
     gradleWrapperFile: android/gradlew
